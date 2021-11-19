@@ -48,10 +48,9 @@ Route::get('/subscribers/{id}', [SubscribersController::class, 'show']);
 Route::put('/subscribers/{id}', [SubscribersController::class, 'update']);
 Route::delete('/subscribers/{id}', [SubscribersController::class, 'destroy']);
 
-Route::get('/send-emails', function(){
-    Artisan::call('queue:work');
-    // return response()->json(['message' => 'Queue started...'], 200);
-});
+// Route::get('/send-emails', function(){
+//     Artisan::call('queue:work');
+// });
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
