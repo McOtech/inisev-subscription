@@ -3,8 +3,12 @@
 use App\Http\Controllers\PostsController;
 use App\Http\Controllers\SubscribersController;
 use App\Http\Controllers\WebsitesController;
+use App\Mail\NewPost;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Artisan;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Route;
+use Symfony\Component\Process\Process;
 
 /*
 |--------------------------------------------------------------------------
@@ -43,6 +47,11 @@ Route::post('/subscribers', [SubscribersController::class, 'store']);
 Route::get('/subscribers/{id}', [SubscribersController::class, 'show']);
 Route::put('/subscribers/{id}', [SubscribersController::class, 'update']);
 Route::delete('/subscribers/{id}', [SubscribersController::class, 'destroy']);
+
+Route::get('/send-emails', function(){
+    Artisan::call('queue:work');
+    // return response()->json(['message' => 'Queue started...'], 200);
+});
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();

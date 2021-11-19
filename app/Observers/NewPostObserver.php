@@ -2,7 +2,11 @@
 
 namespace App\Observers;
 
+use App\Mail\NewPost;
 use App\Models\Post;
+use App\Models\subscriber;
+use App\Models\Website;
+use Illuminate\Support\Facades\Mail;
 
 class NewPostObserver
 {
@@ -14,7 +18,10 @@ class NewPostObserver
      */
     public function created(Post $post)
     {
-        //
+        $subscribers = $post->website->subscribers;
+        foreach ($subscribers as $subscriber) {
+            Mail::to($subscriber->email)->send(new NewPost($post->title, $post->description));
+        }
     }
 
     /**

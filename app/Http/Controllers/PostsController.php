@@ -16,7 +16,7 @@ class PostsController extends Controller
      */
     public function index($websiteId)
     {
-        $posts = Post::where('websites_id', $websiteId)->get();
+        $posts = Post::where('website_id', $websiteId)->get();
         return response()->json($posts, 200);
     }
 
@@ -47,7 +47,7 @@ class PostsController extends Controller
             ]);
             // Stores the website record
             $storedPost = Post::create([
-                'websites_id' => $validPost['website_id'],
+                'website_id' => $validPost['website_id'],
                 'title' => $validPost['title'],
                 'description' => $validPost['description']
             ]);

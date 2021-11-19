@@ -9,6 +9,10 @@ class Post extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'websites_id', 'title', 'description'
+        'website_id', 'title', 'description'
     ];
+
+    function website() {
+        return $this->belongsTo(Website::class);
+    }
 }
