@@ -32,7 +32,6 @@ class NewPost extends Mailable implements ShouldQueue
     public function build()
     {
         return $this
-        ->from('oteaz.the.affiliate@gmail.com')
         ->subject('New Post')
         ->view('email.new_post', ['description' => $this->description, 'title' => $this->title]);
     }
